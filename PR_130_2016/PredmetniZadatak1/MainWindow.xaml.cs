@@ -60,7 +60,10 @@ namespace PredmetniZadatak1
         private void SelectedButton(Button button)
         {
             Style style = FindResource("SelectedButton") as Style;
-            button.Style = style;    
+            if (dictionary[button.Name])
+                button.Style = style;
+            else
+                InitialLookButton(button); // ako dva puta za redom kliknem
         }
 
         #region Button click
@@ -68,7 +71,6 @@ namespace PredmetniZadatak1
         private void SelectButton(string buttonName)
         {
             // kliknuti dugmic ce promijeniti svoju vrijednost(boju)
-            Dictionary<string, bool> tempDictionary = new Dictionary<string, bool>(dictionary);
             foreach (var item in dictionary)
             {
                 if (item.Key.Equals(buttonName))
@@ -77,6 +79,7 @@ namespace PredmetniZadatak1
                     break;
                 }
             }
+            Dictionary<string, bool> tempDictionary = new Dictionary<string, bool>(dictionary);
             // ostali ce biti iskljuceni
             foreach (var item in dictionary)
             {
