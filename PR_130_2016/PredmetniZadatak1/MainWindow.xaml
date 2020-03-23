@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak1"
+        xmlns:View="clr-namespace:PredmetniZadatak1.View"
+        xmlns:ViewModel="clr-namespace:PredmetniZadatak1.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="520">
-
     <Window.Resources>
         <Style x:Key="InitialLookButton" TargetType="Button">
             <Setter Property="Template">
@@ -15,8 +16,47 @@
                         <Grid>
                             <Rectangle>
                                 <Rectangle.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,2" StartPoint="0.5,0">
+                                    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                        <GradientStop Color="#ff5050" Offset="0"/>
+                                        <GradientStop Color="#ffe6e6" Offset="0.6"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="InitialLook2Button" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1.7" StartPoint="0.5,0.1">
                                         <GradientStop Color="#ff5050" Offset="0.4"/>
+                                        <GradientStop Color="#ffe6e6" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DragMouseOverButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#ff1a1a" Offset="0.6"/>
                                         <GradientStop Color="#ffe6e6"/>
                                     </LinearGradientBrush>
                                 </Rectangle.Fill>
@@ -28,16 +68,16 @@
             </Setter>
         </Style>
 
-        <Style x:Key="DragMouseOverButton" TargetType="Button">
+        <Style x:Key="DragMouseOverButton2" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
                             <Rectangle>
                                 <Rectangle.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#ff1a1a" Offset="0.6"/>
-                                        <GradientStop Color="WhiteSmoke"/>
+                                    <LinearGradientBrush EndPoint="0.504,1.2" StartPoint="0.504,0.4">
+                                        <GradientStop Color="#ff1a1a" Offset="0"/>
+                                        <GradientStop Color="#ffe6e6" Offset="0.8"/>
                                     </LinearGradientBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
@@ -57,7 +97,7 @@
                                 <Rectangle.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#cc0000" Offset="0.6"/>
-                                        <GradientStop Color="WhiteSmoke"/>
+                                        <GradientStop Color="#ffb3b3"/>
                                     </LinearGradientBrush>
                                 </Rectangle.Fill>
                             </Rectangle>
@@ -67,31 +107,34 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--<DataTemplate DataType="{x:Type ViewModel:EllipseViewModel}">
+            <View:EllipseView></View:EllipseView>
+        </DataTemplate>-->
+
     </Window.Resources>
     
     <Grid Background="#ffe6e6">
-        <StackPanel Height="40" VerticalAlignment="Top" Margin="25,10,20,0" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" FontSize="40" Text=" "/>
-            <Button Name="buttonEllipse" Content="Ellipse"  Width="100" Style="{StaticResource InitialLookButton}" Click="buttonEllipse_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="45" Text=" "/>
-            <Button Name="buttonRectangle" Content="Rectangle"  Width="100" Style="{StaticResource InitialLookButton}" Click="buttonRectangle_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="45" Text=" "/>
-            <Button x:Name="buttonPolygon" Content="Polygon"  Width="100" Style="{StaticResource InitialLookButton}" Click="buttonPolygon_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="45" Text=" "/>
-            <Button Name="buttonImage" Content="Image"  Width="100" Style="{StaticResource InitialLookButton}" Click="buttonImage_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="40" Text=" "/>
+        <StackPanel Height="40" VerticalAlignment="Top" Margin="27,10,27,0" Orientation="Horizontal">
+            <Button Name="buttonEllipse" Content="Ellipse"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLookButton}" Click="buttonEllipse_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
+            <Button Name="buttonRectangle" Content="Rectangle"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLookButton}" Click="buttonRectangle_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
+            <Button x:Name="buttonPolygon" Content="Polygon"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLookButton}" Click="buttonPolygon_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
+            <Button Name="buttonImage" Content="Image"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLookButton}" Click="buttonImage_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
         </StackPanel>
 
-        <Canvas Background="#ffffff" Margin="20,60,20,60"/>
+        <Canvas Name="DrawingCanvas" Background="#ffffff" Margin="27,60,27,60" PreviewMouseRightButtonDown="PreviewMouseRightButtonDown">
+            <!--<ContentControl Content="{Binding CurrentView, Mode=OneWay}" />-->
+        </Canvas>
 
-        <StackPanel Height="40" VerticalAlignment="Bottom" Margin="80,0,80,10" Orientation="Horizontal">
-            <TextBlock TextWrapping="Wrap" FontSize="40" Text=" "/>
-            <Button Name="buttonUndo" Content="Undo"  Width="100" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="45" Text=" "/>
-            <Button Name="buttonRedo" Content="Redo"  Width="100" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="45" Text=" "/>
-            <Button Name="buttonClear" Content="Clear"  Width="100" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
-            <TextBlock TextWrapping="Wrap" FontSize="40" Text=" "/>
+        <StackPanel Height="40" VerticalAlignment="Bottom" Margin="85,0,85,10" Orientation="Horizontal">
+            <Button Name="buttonUndo" Content="Undo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
+            <Button Name="buttonRedo" Content="Redo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
+            <Button Name="buttonClear" Content="Clear"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
         </StackPanel>
     </Grid>
 </Window>

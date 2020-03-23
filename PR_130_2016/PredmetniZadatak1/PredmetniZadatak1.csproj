@@ -55,6 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Coordinates.cs" />
+    <Compile Include="Model\EnumShape.cs" />
+    <Compile Include="Model\StackClass.cs" />
+    <Compile Include="ViewModel\EllipseViewModel.cs" />
+    <Compile Include="View\EllipseAndRectangleView.xaml.cs">
+      <DependentUpon>EllipseAndRectangleView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,8 +74,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\EllipseAndRectangleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\EllipseShape.cs" />
+    <Compile Include="Model\PolygonShape.cs" />
+    <Compile Include="Model\RectangleShape.cs" />
+    <Compile Include="Model\TemplateShape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,10 +109,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

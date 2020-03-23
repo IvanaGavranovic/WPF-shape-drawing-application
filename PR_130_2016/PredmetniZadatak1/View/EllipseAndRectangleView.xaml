@@ -1,0 +1,81 @@
+﻿<Window x:Class="PredmetniZadatak1.View.EllipseAndRectangleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PredmetniZadatak1.View"
+        mc:Ignorable="d"
+        Title="EllipseAndRectangleView" Height="500" Width="520">
+    <Window.Resources>
+        <Style x:Key="InitialLookButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                        <GradientStop Color="#ff5050" Offset="0"/>
+                                        <GradientStop Color="#ffe6e6" Offset="0.7"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DragMouseOverButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#ff1a1a" Offset="0.6"/>
+                                        <GradientStop Color="#ffe6e6"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SelectedButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#cc0000" Offset="0.6"/>
+                                        <GradientStop Color="#ffb3b3"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#ffe6e6">
+        <Label Content="Width" HorizontalAlignment="Left" Height="40" Margin="60,50,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
+        <Label Content="Height" HorizontalAlignment="Left" Height="40" Margin="60,100,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
+        <Label Content="FillColor" HorizontalAlignment="Left" Height="40" Margin="60,150,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
+        <Label Content="BorderColor" HorizontalAlignment="Left" Height="40" Margin="60,200,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
+        <Label Content="StrokeThickness" HorizontalAlignment="Left" Height="40" Margin="60,250,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="200,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <TextBox  HorizontalAlignment="Left" Height="40" Margin="200,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <ComboBox Name="fillColor" HorizontalAlignment="Left" Height="40" Margin="200,150,0,0" VerticalAlignment="Top" Width="200"/>
+        <ComboBox Name="borderColor" HorizontalAlignment="Left" Height="40" Margin="200,200,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBox HorizontalAlignment="Left" Height="40" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200"/>
+        <Button Name="buttonDraw" Content="Draw" Margin="200,330,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonDraw_Click"/>
+    </Grid>
+</Window>

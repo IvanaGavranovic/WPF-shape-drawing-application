@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PredmetniZadatak1.Model;
+using PredmetniZadatak1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +27,9 @@ namespace PredmetniZadatak1
 
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            Title = "Drawing window";
             dictionary = new Dictionary<string, bool>
             {
                 {buttonEllipse.Name, false},
@@ -44,16 +48,28 @@ namespace PredmetniZadatak1
                 buttonClear
             };
         }
-
+        #region Button style
         private void InitialLookButton(Button button)
         {
             Style style = FindResource("InitialLookButton") as Style;
             button.Style = style;
         }
 
+        private void InitialLook2Button(Button button)
+        {
+            Style style = FindResource("InitialLook2Button") as Style;
+            button.Style = style;
+        }
+
         private void DragMouseOverButton(Button button)
         {
             Style style = FindResource("DragMouseOverButton") as Style;
+            button.Style = style;
+        }
+
+        private void DragMouseOverButton2(Button button)
+        {
+            Style style = FindResource("DragMouseOverButton2") as Style;
             button.Style = style;
         }
 
@@ -65,6 +81,7 @@ namespace PredmetniZadatak1
             else
                 InitialLookButton(button); // ako dva puta za redom kliknem
         }
+        #endregion
 
         #region Button click
         // cilj -> dobiti dictionary sa 1 button-om cija je vrijednost true, svi ostali false
@@ -131,8 +148,10 @@ namespace PredmetniZadatak1
         {
             foreach (Button item in allButtons)
             {
-                if (item.IsMouseOver)
+                if (item.IsMouseOver && dictionary.ContainsKey(item.Name))
                     DragMouseOverButton(item);
+                else if (item.IsMouseOver)
+                    DragMouseOverButton2(item);
             }
         }
 
@@ -147,8 +166,31 @@ namespace PredmetniZadatak1
                         InitialLookButton(item);
                 }
                 else if (!item.IsMouseOver)
-                    InitialLookButton(item);
+                    InitialLook2Button(item);
         }
         #endregion
+
+        void DrawShapeOnCanvas()
+        {
+            TemplateShape teplateShape = StackClass.NewShape;
+            StackClass.ActiveShape.Push(teplateShape);
+            DrawingCanvas.Children.Add(teplateShape.Draw());
+        }
+
+        private void PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            foreach (var item in dictionary)
+                if (item.Value)
+                {
+                    Point point = e.GetPosition(DrawingCanvas);
+                    // za 2 vrijednosti dictiornary-ja
+                    EllipseAndRectangleView ERView = new EllipseAndRectangleView(point);
+                    ERView.ShowDialog();
+                    // 
+
+                    DrawShapeOnCanvas();
+                }
+
+        }
     }
 }
