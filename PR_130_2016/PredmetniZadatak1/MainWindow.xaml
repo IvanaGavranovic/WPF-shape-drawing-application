@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PredmetniZadatak1"
         xmlns:View="clr-namespace:PredmetniZadatak1.View"
-        xmlns:ViewModel="clr-namespace:PredmetniZadatak1.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="520">
     <Window.Resources>

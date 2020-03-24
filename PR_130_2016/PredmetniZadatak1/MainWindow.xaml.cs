@@ -186,10 +186,18 @@ namespace PredmetniZadatak1
                 {
                     Point point = e.GetPosition(DrawingCanvas);
                     // za 2 vrijednosti dictiornary-ja
-                    EllipseAndRectangleView ERView = new EllipseAndRectangleView(point);
-                    ERView.ShowDialog();
-                    // 
-
+                    if(item.Key.Equals(buttonEllipse) || item.Key.Equals(buttonRectangle))
+                    {
+                        EllipseAndRectangleView ERView = new EllipseAndRectangleView(point);
+                        ERView.ShowDialog();
+                        break;
+                    }
+                    else if (item.Key.Equals(buttonImage))
+                    {
+                        ImageView IView = new ImageView(point);
+                        IView.ShowDialog();
+                        break;
+                    }
                     DrawShapeOnCanvas();
                 }
 

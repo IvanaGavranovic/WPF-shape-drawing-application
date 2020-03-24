@@ -85,7 +85,13 @@
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Background" Value="#ffe6e6"/>
-            <Setter Property="BorderBrush" Value="#ff5050"/>
+            <Setter Property="BorderBrush" Value="#ff6666"/>
+            <Setter Property="Border.Background" Value="#ffe6e6"/>
+            <Style.Triggers>
+                <Trigger Property="Border.IsMouseOver" Value="True">
+                    <Setter Property="Border.Background" Value="#ff8080" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <!-- Pametnica obojila combobox -->
         <Style x:Key="FocusVisual">
@@ -431,8 +437,8 @@
         <Label Content="FillColor" HorizontalAlignment="Left" Height="40" Margin="80,150,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
         <Label Content="BorderColor" HorizontalAlignment="Left" Height="40" Margin="80,200,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
         <Label Content="StrokeThickness" HorizontalAlignment="Left" Height="40" Margin="80,250,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
-        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" />
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="200,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox" />
+        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="200,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox"/>
         <ComboBox x:Name="fillColor" HorizontalAlignment="Left" Height="40" Margin="200,150,0,0" VerticalAlignment="Top" Width="200" BorderBrush="LightGray" Style="{DynamicResource ComboBoxStyle2}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -454,7 +460,7 @@
 
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="textBoxThickness" HorizontalAlignment="Left" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+        <TextBox x:Name="textBoxThickness" HorizontalAlignment="Left" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox"/>
         <Button x:Name="buttonDraw" Content="Draw" Margin="200,330,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonDraw_Click"/>
 
     </Grid>

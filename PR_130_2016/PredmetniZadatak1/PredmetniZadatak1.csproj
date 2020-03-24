@@ -58,10 +58,13 @@
     </ApplicationDefinition>
     <Compile Include="Model\Coordinates.cs" />
     <Compile Include="Model\EnumShape.cs" />
+    <Compile Include="Model\ImageShape.cs" />
     <Compile Include="Model\StackClass.cs" />
-    <Compile Include="ViewModel\EllipseViewModel.cs" />
     <Compile Include="View\EllipseAndRectangleView.xaml.cs">
       <DependentUpon>EllipseAndRectangleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ImageView.xaml.cs">
+      <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -76,6 +79,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\EllipseAndRectangleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

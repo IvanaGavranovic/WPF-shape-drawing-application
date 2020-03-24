@@ -17,7 +17,7 @@ namespace PredmetniZadatak1.Model
         public Brush FillColor { get => fillColor; set => fillColor = value; }
         public Brush BorderColor { get => borderColor; set => borderColor = value; }
         public int BorderThickness { get => borderThickness; set => borderThickness = value; }
-
+        public TemplateShape(){}
         public TemplateShape(Brush fillColor, Brush borderColor, int borederThickness)
         {
             FillColor = fillColor;

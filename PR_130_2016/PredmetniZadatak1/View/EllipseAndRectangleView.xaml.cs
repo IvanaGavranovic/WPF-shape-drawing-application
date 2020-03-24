@@ -109,23 +109,25 @@ namespace PredmetniZadatak1.View
             {
                 if (item.IsMouseOver)
                     TextboxDrawMouseStyle(item);
-            }
-        }
-        private void MouseLeaveTextBox(object sender, MouseEventArgs e)
-        {
-            foreach (var item in textBox)
-            {
-                if (!item.IsMouseOver)
+                else
                     TextboxStyle(item);
             }
         }
-            #endregion
+        //private void MouseLeaveTextBox(object sender, MouseEventArgs e)
+        //{
+        //    foreach (var item in textBox)
+        //    {
+        //        if (!(item.IsMouseOver))
+        //            TextboxStyle(item);
+        //    }
+        //}
+        #endregion
 
 
-            #region Draw button
+        #region Draw button
 
-            #region Create shape
-            bool ValidateColor(ComboBox comboBox)
+        #region Create shape
+        bool ValidateColor(ComboBox comboBox)
         {
             if (borderColor.SelectedItem == null)
             {
