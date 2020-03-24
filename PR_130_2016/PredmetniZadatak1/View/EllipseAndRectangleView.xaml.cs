@@ -18,6 +18,7 @@ namespace PredmetniZadatak1.View
 {  
     public partial class EllipseAndRectangleView : Window
     {
+        private EnumShape shapeToDraw;
         private Point pointToDraw;
         private Button drawButton;
 
@@ -43,17 +44,19 @@ namespace PredmetniZadatak1.View
                     {
                         case "buttonEllipse":
                             Title = "Drawing an ellipse";
-
+                            shapeToDraw = EnumShape.ELLIPSE;
                             break;
 
                         case "buttonRectangle":
                             Title = "Drawing a rectangle";
+                            shapeToDraw = EnumShape.RECTANGLE;
                             break;
                     }
                 }
             }
         }
 
+        #region Mouse position
         private void InitialLookButton(Button button)
         {
             Style style = FindResource("InitialLookButton") as Style;
@@ -72,23 +75,109 @@ namespace PredmetniZadatak1.View
         
         private void MouseEnter(object sender, MouseEventArgs e)
         {
-            DragMouseOverButton(buttonDraw);
+            if (buttonDraw.IsEnabled && buttonDraw.IsMouseOver)
+                DragMouseOverButton(buttonDraw);
         }
         private void MouseLeave(object sender, MouseEventArgs e)
         {
-            InitialLookButton(buttonDraw);
+            if(buttonDraw.IsEnabled && !buttonDraw.IsMouseOver)
+                InitialLookButton(buttonDraw);
+        }
+        #endregion
+
+
+        #region Draw button
+
+        bool ValidateColor(ComboBox comboBox)
+        {
+            if (borderColor.SelectedItem == null)
+            {
+                comboBox.BorderBrush = Brushes.Red;
+                MessageBox.Show("Please select color!");
+                return false;
+            }
+            comboBox.BorderBrush = Brushes.LightGray;
+            return true;
+        }
+
+        bool ValidateTexBox(TextBox textBox)
+        {
+            if (textBox.Text.Length == 0 || string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Style = (Style)FindResource("TextboxErrorStyle");
+                MessageBox.Show("Please enter number!");
+                return false;
+            }
+
+            int num = 0;
+            if (!Int32.TryParse(textBox.Text, out num))
+            {
+                textBox.Style = (Style)FindResource("TextboxErrorStyle");
+                MessageBox.Show("Please enter number!");
+                return false;
+            }
+            if (num < 0)
+            {
+                textBox.Style = (Style)FindResource("TextboxErrorStyle");
+                MessageBox.Show("Number must be greater than zero!");
+                return false;
+            }
+            textBox.Style = (Style)FindResource("TextboxStyle");
+            return true;
+        }
+
+        TemplateShape CreateEllipse()
+        {
+            var selectedItem = (PropertyInfo)borderColor.SelectedItem;
+            Color color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush border = new SolidColorBrush(color);
+
+            selectedItem = (PropertyInfo)fillColor.SelectedItem;
+            color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush fill = new SolidColorBrush(color);
+            int width = Int32.Parse(textBoxWidth.Text);
+            int height = Int32.Parse(textBoxHeight.Text);
+            int Thickness = Int32.Parse(textBoxThickness.Text);
+
+            return new EllipseShape(pointToDraw.X, pointToDraw.Y, width, height, border, fill, Thickness);
+        }
+
+        TemplateShape CreateRectangle()
+        {
+            var selectedItem = (PropertyInfo)borderColor.SelectedItem;
+            Color color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush border = new SolidColorBrush(color);
+
+            selectedItem = (PropertyInfo)fillColor.SelectedItem;
+            color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush fill = new SolidColorBrush(color);
+            int width = Int32.Parse(textBoxWidth.Text);
+            int height = Int32.Parse(textBoxHeight.Text);
+            int Thickness = Int32.Parse(textBoxThickness.Text);
+
+            return new RectangleShape(pointToDraw.X, pointToDraw.Y, width, height, border, fill, Thickness);
         }
 
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = (PropertyInfo)borderColor.SelectedItem;
-            Color color = (Color)selectedItem.GetValue(null, null);
-            SolidColorBrush b = new SolidColorBrush(color);
+            TemplateShape ret = null;
+            switch (shapeToDraw)
+            {
+                case EnumShape.ELLIPSE:
+                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                        return;
+                    ret = CreateEllipse();
 
-            EllipseShape ellipse = new EllipseShape(pointToDraw.X, pointToDraw.Y, 100, 200, b, b, 2);
-            StackClass.NewShape = ellipse;
+                    break;
+                case EnumShape.RECTANGLE:
+                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                        return;
+                    ret = CreateRectangle();
+                    break;
+            }
+            StackClass.NewShape = ret;
             Close();
         }
-        
+        #endregion
     }
 }

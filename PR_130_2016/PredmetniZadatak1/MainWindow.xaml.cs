@@ -173,6 +173,8 @@ namespace PredmetniZadatak1
         void DrawShapeOnCanvas()
         {
             TemplateShape teplateShape = StackClass.NewShape;
+            if (teplateShape == null)
+                return;
             StackClass.ActiveShape.Push(teplateShape);
             DrawingCanvas.Children.Add(teplateShape.Draw());
         }
