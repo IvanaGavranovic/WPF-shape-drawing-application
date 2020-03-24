@@ -35,7 +35,7 @@
                             <Rectangle>
                                 <Rectangle.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#ff1a1a" Offset="0.6"/>
+                                        <GradientStop Color="#ff1a1a" Offset="0.7"/>
                                         <GradientStop Color="#ffe6e6"/>
                                     </LinearGradientBrush>
                                 </Rectangle.Fill>
@@ -65,11 +65,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="TextboxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="40"/>
+            <Setter Property="FontFamily" Value="Global serif"/>
             <Setter Property="Background" Value="#ffe6e6"/>
             <Setter Property="BorderBrush" Value="Black"/>
         </Style>
@@ -80,8 +80,15 @@
             <Setter Property="Background" Value="#ffe6e6"/>
             <Setter Property="BorderBrush" Value="Red"/>
         </Style>
+        <Style x:Key="TextboxDrawMouseStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="#ffe6e6"/>
+            <Setter Property="BorderBrush" Value="#ff5050"/>
+        </Style>
         <!-- Pametnica obojila combobox -->
-            <Style x:Key="FocusVisual">
+        <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
@@ -91,42 +98,42 @@
             </Setter>
         </Style>
         <LinearGradientBrush x:Key="ComboBox.Static.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#ff5050" Offset="0.0"/>
+            <GradientStop Color="#ffe6e6" Offset="0.0"/>
             <GradientStop Color="#ffe6e6" Offset="1.0"/>
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#ffe6e6"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Border" Color="Black"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#ffe6e6"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#ffe6e6"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
         <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
-        <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#ff1a1a"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#ff5050"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#ff1a1a" Offset="0.0"/>
+            <GradientStop Color="#ff5050" Offset="0.0"/>
             <GradientStop Color="#ffe6e6" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#ffe6e6"/>
-        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#ff1a1a"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#ff5050"/>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#ffe6e6"/>
         <LinearGradientBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#ff1a1a" Offset="0.0"/>
+            <GradientStop Color="#ff5050" Offset="0.0"/>
             <GradientStop Color="#ffe6e6" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF7EB4EA"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF000000"/>
         <LinearGradientBrush x:Key="ComboBox.Pressed.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#ff1a1a" Offset="0.0"/>
+            <GradientStop Color="#ff5050" Offset="0.0"/>
             <GradientStop Color="#ffe6e6" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FF569DE5"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
         <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF569DE5"/>
         <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background" EndPoint="0,1" StartPoint="0,0">
-            <GradientStop Color="#ff1a1a" Offset="0.0"/>
+            <GradientStop Color="#ff5050" Offset="0.0"/>
             <GradientStop Color="#ffe6e6" Offset="1.0"/>
         </LinearGradientBrush>
         <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#ffe6e6"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#ffe6e6"/>
-        <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#ff1a1a"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#ff5050"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#ffe6e6"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#ffe6e6"/>
         <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Border" Color="#ffe6e6"/>
@@ -361,17 +368,72 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <LinearGradientBrush x:Key="ComboBox.Static.Background2" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF0F0F0" Offset="0.0"/>
+            <GradientStop Color="#FFE5E5E5" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.Static.Border2" Color="#FFACACAC"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Background2" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Editable.Border2" Color="#FFABADB3"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph2" Color="#FF000000"/>
+        <LinearGradientBrush x:Key="ComboBox.MouseOver.Background2" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFECF4FC" Offset="0.0"/>
+            <GradientStop Color="#FFDCECFC" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Border2" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background2" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border2" Color="#FF7EB4EA"/>
+        <LinearGradientBrush x:Key="ComboBox.MouseOver.Editable.Button.Background2" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFEBF4FC" Offset="0.0"/>
+            <GradientStop Color="#FFDCECFC" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ComboBox.Pressed.Background2" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFDAECFC" Offset="0.0"/>
+            <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ComboBox.Pressed.Editable.Button.Background2" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFDAEBFC" Offset="0.0"/>
+            <GradientStop Color="#FFC4E0FC" Offset="1.0"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border2" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Glyph2" Color="#FFBFBFBF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Background2" Color="#FFF0F0F0"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Border2" Color="#FFD9D9D9"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background2" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Border2" Color="#FFBFBFBF"/>
+        <SolidColorBrush x:Key="ComboBox.Static.Glyph2" Color="#FF606060"/>
+        <Style x:Key="ComboBoxStyle2" TargetType="{x:Type ComboBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ComboBox.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ComboBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Padding" Value="6,3,5,3"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+            <Style.Triggers>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="IsTabStop" Value="false"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!-- Amin -->
     </Window.Resources>
     <Grid Background="#ffe6e6">
-        <Label Content="Width" HorizontalAlignment="Left" Height="40" Margin="60,50,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
-        <Label Content="Height" HorizontalAlignment="Left" Height="40" Margin="60,100,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
-        <Label Content="FillColor" HorizontalAlignment="Left" Height="40" Margin="60,150,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
-        <Label Content="BorderColor" HorizontalAlignment="Left" Height="40" Margin="60,200,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
-        <Label Content="StrokeThickness" HorizontalAlignment="Left" Height="40" Margin="60,250,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
-        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}"/>
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="200,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}"/>
-        <ComboBox x:Name="fillColor" HorizontalAlignment="Left" Height="40" Margin="200,150,0,0" VerticalAlignment="Top" Width="200" BorderBrush="LightGray">
+        <Label Content="Width" HorizontalAlignment="Left" Height="40" Margin="80,50,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
+        <Label Content="Height" HorizontalAlignment="Left" Height="40" Margin="80,100,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
+        <Label Content="FillColor" HorizontalAlignment="Left" Height="40" Margin="80,150,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
+        <Label Content="BorderColor" HorizontalAlignment="Left" Height="40" Margin="80,200,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
+        <Label Content="StrokeThickness" HorizontalAlignment="Left" Height="40" Margin="80,250,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
+        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="200,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" />
+        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="200,100,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+        <ComboBox x:Name="fillColor" HorizontalAlignment="Left" Height="40" Margin="200,150,0,0" VerticalAlignment="Top" Width="200" BorderBrush="LightGray" Style="{DynamicResource ComboBoxStyle2}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -392,7 +454,7 @@
 
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="textBoxThickness" HorizontalAlignment="Left" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" />
+        <TextBox x:Name="textBoxThickness" HorizontalAlignment="Left" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
         <Button x:Name="buttonDraw" Content="Draw" Margin="200,330,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonDraw_Click"/>
 
     </Grid>

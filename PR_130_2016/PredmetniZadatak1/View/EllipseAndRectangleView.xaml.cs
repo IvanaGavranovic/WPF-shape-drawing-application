@@ -21,12 +21,20 @@ namespace PredmetniZadatak1.View
         private EnumShape shapeToDraw;
         private Point pointToDraw;
         private Button drawButton;
+        private List<TextBox> textBox;
 
         public EllipseAndRectangleView(Point point)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
-      
+
+            textBox = new List<TextBox>
+            {
+                textBoxWidth,
+                textBoxHeight,
+                textBoxThickness
+            };
+
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
 
@@ -72,23 +80,52 @@ namespace PredmetniZadatak1.View
             Style style = FindResource("SelectedButton") as Style;
             button.Style = style;
         }
-        
+       
         private void MouseEnter(object sender, MouseEventArgs e)
         {
             if (buttonDraw.IsEnabled && buttonDraw.IsMouseOver)
                 DragMouseOverButton(buttonDraw);
         }
+
         private void MouseLeave(object sender, MouseEventArgs e)
         {
             if(buttonDraw.IsEnabled && !buttonDraw.IsMouseOver)
                 InitialLookButton(buttonDraw);
         }
-        #endregion
+
+        private void TextboxDrawMouseStyle(TextBox tb)
+        {
+            Style style = FindResource("TextboxDrawMouseStyle") as Style;
+            tb.Style = style;
+        }
+        private void TextboxStyle(TextBox tb)
+        {
+            Style style = FindResource("TextboxStyle") as Style;
+            tb.Style = style;
+        }
+        private void MouseEnterTextBox(object sender, MouseEventArgs e)
+        {
+            foreach (var item in textBox)
+            {
+                if (item.IsMouseOver)
+                    TextboxDrawMouseStyle(item);
+            }
+        }
+        private void MouseLeaveTextBox(object sender, MouseEventArgs e)
+        {
+            foreach (var item in textBox)
+            {
+                if (!item.IsMouseOver)
+                    TextboxStyle(item);
+            }
+        }
+            #endregion
 
 
-        #region Draw button
+            #region Draw button
 
-        bool ValidateColor(ComboBox comboBox)
+            #region Create shape
+            bool ValidateColor(ComboBox comboBox)
         {
             if (borderColor.SelectedItem == null)
             {
@@ -157,6 +194,7 @@ namespace PredmetniZadatak1.View
 
             return new RectangleShape(pointToDraw.X, pointToDraw.Y, width, height, border, fill, Thickness);
         }
+        #endregion
 
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {

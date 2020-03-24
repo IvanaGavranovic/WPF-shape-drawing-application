@@ -107,11 +107,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <!--<DataTemplate DataType="{x:Type ViewModel:EllipseViewModel}">
-            <View:EllipseView></View:EllipseView>
-        </DataTemplate>-->
-
     </Window.Resources>
     
     <Grid Background="#ffe6e6">
