@@ -155,7 +155,7 @@ namespace PredmetniZadatak1.View
                 MessageBox.Show("Please enter number!");
                 return false;
             }
-            if (num < 0)
+            if (num <= 0)
             {
                 textBox.Style = (Style)FindResource("TextboxErrorStyle");
                 MessageBox.Show("Number must be greater than zero!");

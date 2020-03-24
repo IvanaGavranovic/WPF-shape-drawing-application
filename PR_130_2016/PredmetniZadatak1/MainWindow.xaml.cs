@@ -182,25 +182,43 @@ namespace PredmetniZadatak1
         private void PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             foreach (var item in dictionary)
+            { 
                 if (item.Value)
                 {
                     Point point = e.GetPosition(DrawingCanvas);
                     // za 2 vrijednosti dictiornary-ja
-                    if(item.Key.Equals(buttonEllipse) || item.Key.Equals(buttonRectangle))
+                    if(item.Key.Equals(buttonEllipse.Name) || item.Key.Equals(buttonRectangle.Name))
                     {
                         EllipseAndRectangleView ERView = new EllipseAndRectangleView(point);
                         ERView.ShowDialog();
-                        break;
+                        DrawShapeOnCanvas();
                     }
-                    else if (item.Key.Equals(buttonImage))
+                    else if (item.Key.Equals(buttonImage.Name))
                     {
                         ImageView IView = new ImageView(point);
                         IView.ShowDialog();
-                        break;
-                    }
-                    DrawShapeOnCanvas();
+                        DrawShapeOnCanvas();
+                    }    
                 }
+            }
+        }            
+        private void buttonUndo_Click(object sender, RoutedEventArgs e)
+        {
+            if (StackClass.ActiveShape.Count == 0)
+                return;
+            TemplateShape shape = StackClass.ActiveShape.Pop();
 
+            DrawingCanvas.Children.RemoveAt(DrawingCanvas.Children.Count - 1);
+            StackClass.Undo.Push(shape);
+        }
+
+        private void buttonRedo_Click(object sender, RoutedEventArgs e)
+        {
+            if (StackClass.Undo.Count == 0)
+                return;
+            TemplateShape shape = StackClass.Undo.Pop();
+            DrawingCanvas.Children.Add(shape.Draw());
+            StackClass.ActiveShape.Push(shape);
         }
     }
 }

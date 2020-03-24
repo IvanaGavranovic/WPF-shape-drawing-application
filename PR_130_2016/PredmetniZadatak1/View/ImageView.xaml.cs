@@ -44,6 +44,7 @@ namespace PredmetniZadatak1.View
                 buttonDraw
             };
             pointToDraw = point;
+            shapeToDraw = EnumShape.IMAGE;
         }
         private void InitialLookButton(Button button)
         {
@@ -65,7 +66,7 @@ namespace PredmetniZadatak1.View
             foreach (var item in buttons)
             {
                 if (item.IsEnabled && item.IsMouseOver)
-                    DragMouseOverButton(buttonDraw);
+                    DragMouseOverButton(item);
             }
         }
 
@@ -74,7 +75,28 @@ namespace PredmetniZadatak1.View
             foreach (var item in buttons)
             {
                 if (item.IsEnabled && !item.IsMouseOver)
-                    InitialLookButton(buttonDraw);
+                    InitialLookButton(item);
+            }
+        }
+
+        private void TextboxDrawMouseStyle(TextBox tb)
+        {
+            Style style = FindResource("TextboxDrawMouseStyle") as Style;
+            tb.Style = style;
+        }
+        private void TextboxStyle(TextBox tb)
+        {
+            Style style = FindResource("TextboxStyle") as Style;
+            tb.Style = style;
+        }
+        private void MouseEnterTextBox(object sender, MouseEventArgs e)
+        {
+            foreach (var item in textBox)
+            {
+                if (item.IsMouseOver)
+                    TextboxDrawMouseStyle(item);
+                else
+                    TextboxStyle(item);
             }
         }
 
@@ -94,7 +116,7 @@ namespace PredmetniZadatak1.View
                 MessageBox.Show("Please enter number!");
                 return false;
             }
-            if (num < 0)
+            if (num <= 0)
             {
                 textBox.Style = (Style)FindResource("TextboxErrorStyle");
                 MessageBox.Show("Number must be greater than zero!");
@@ -119,7 +141,7 @@ namespace PredmetniZadatak1.View
             int width = Int32.Parse(textBoxWidth.Text);
             int height = Int32.Parse(textBoxHeight.Text);
             return new ImageShape(pointToDraw.X, pointToDraw.Y, width, height, imgPath);
-        }
+        }       
 
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
@@ -139,7 +161,7 @@ namespace PredmetniZadatak1.View
         private void buttonChoose_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png|vAll files (*.*)|*.*";
+            dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png|All files (*.*)|*.*";
 
             dialog.InitialDirectory = @"C:\";
             dialog.Title = "Please choose image!";

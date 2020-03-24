@@ -124,9 +124,9 @@
         </Canvas>
 
         <StackPanel Height="40" VerticalAlignment="Bottom" Margin="85,0,85,10" Orientation="Horizontal">
-            <Button Name="buttonUndo" Content="Undo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <Button Name="buttonUndo" Content="Undo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="buttonUndo_Click"/>
             <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
-            <Button Name="buttonRedo" Content="Redo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <Button Name="buttonRedo" Content="Redo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="buttonRedo_Click"/>
             <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
             <Button Name="buttonClear" Content="Clear"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
         </StackPanel>

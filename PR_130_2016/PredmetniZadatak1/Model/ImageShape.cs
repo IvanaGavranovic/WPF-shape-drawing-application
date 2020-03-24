@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -29,7 +31,6 @@ namespace PredmetniZadatak1.Model
             Path = path;
         }
 
-
         public override Shape Draw()
         {
             System.Windows.Shapes.Rectangle retVal = new System.Windows.Shapes.Rectangle();
@@ -44,6 +45,6 @@ namespace PredmetniZadatak1.Model
                 ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute))
             };
             return retVal;
-        }
+        }       
     }
 }
