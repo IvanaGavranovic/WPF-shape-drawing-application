@@ -17,21 +17,21 @@ using System.Windows.Shapes;
 
 namespace PredmetniZadatak1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        #region Fields
         public static Dictionary<string, bool> dictionary;
         static List<Button> allButtons;
         private static bool enableDrawingPoinstForPolygon;
         static private List<Point> pointsForPolygon;
+        #endregion
 
+        #region Constructor
         public MainWindow()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            InitializeComponent();
             Title = "Drawing window";
+            InitializeComponent();         
             dictionary = new Dictionary<string, bool>
             {
                 {buttonEllipse.Name, false},
@@ -52,6 +52,8 @@ namespace PredmetniZadatak1
             enableDrawingPoinstForPolygon = false;
             pointsForPolygon = new List<Point>();
         }
+        #endregion
+
         #region Button style
         private void InitialLookButton(Button button)
         {
@@ -88,10 +90,9 @@ namespace PredmetniZadatak1
         #endregion
 
         #region Button click
-        // cilj -> dobiti dictionary sa 1 button-om cija je vrijednost true, svi ostali false
+        // cilj -> dobiti dictionary sa 1 button-om cija je vrijednost: true, sve ostale: false
         private void SelectButton(string buttonName)
         {
-            // kliknuti dugmic ce promijeniti svoju vrijednost
             foreach (var item in dictionary)
             {
                 if (item.Key.Equals(buttonName))
@@ -101,7 +102,6 @@ namespace PredmetniZadatak1
                 }
             }
             Dictionary<string, bool> tempDictionary = new Dictionary<string, bool>(dictionary);
-            // ostali ce biti iskljuceni
             foreach (var item in dictionary)
             {
                 if (!item.Key.Equals(buttonName) && item.Value)
@@ -135,6 +135,7 @@ namespace PredmetniZadatak1
             InitialLookButton(buttonImage);
             InitialLookButton(buttonRectangle);
             InitialLookButton(buttonEllipse);
+            EnebleDrawingPlygon();
         }
 
         private void buttonImage_Click(object sender, RoutedEventArgs e)
@@ -173,14 +174,15 @@ namespace PredmetniZadatak1
                     InitialLook2Button(item);
         }
         #endregion
-
+        //?
+        #region Draw shape
         void DrawShapeOnCanvas()
         {
-            TemplateShape teplateShape = StackClass.NewShape;
-            if (teplateShape == null)
+            TemplateShape templateShape = StackClass.NewShape;
+            if (templateShape == null)
                 return;
-            StackClass.ActiveShape.Push(teplateShape);
-            DrawingCanvas.Children.Add(teplateShape.Draw());
+            StackClass.ActiveShape.Push(templateShape);
+            DrawingCanvas.Children.Add(templateShape.Draw());
         }
 
         private void PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -190,7 +192,7 @@ namespace PredmetniZadatak1
                 if (item.Value)
                 {
                     Point point = e.GetPosition(DrawingCanvas);
-                    // za 2 vrijednosti dictiornary-ja
+
                     if(item.Key.Equals(buttonEllipse.Name) || item.Key.Equals(buttonRectangle.Name))
                     {
                         EllipseAndRectangleView ERView = new EllipseAndRectangleView(point);
@@ -205,14 +207,13 @@ namespace PredmetniZadatak1
                     }   
                     else if(item.Key.Equals(buttonPolygon.Name) && enableDrawingPoinstForPolygon)
                     {
-                        pointsForPolygon.Add(e.GetPosition(DrawingCanvas));
-
+                        pointsForPolygon.Add(e.GetPosition(DrawingCanvas)); // dodajem tjemena poligona
                         return;
                     }
                 }
             }
         }
-        void EnebleDrawingPlygon()
+        void EnebleDrawingPlygon() // kad kliknem na dugme polygon
         {
             if (!enableDrawingPoinstForPolygon)
             {
@@ -220,10 +221,7 @@ namespace PredmetniZadatak1
                 pointsForPolygon = new List<Point>();
             }
             else
-            {
-                DisableDrawingPoint();
-            }
-
+                DisableDrawingPoint();          
         }
         void DisableDrawingPoint()
         {
@@ -244,7 +242,9 @@ namespace PredmetniZadatak1
             pointsForPolygon = new List<Point>();
             DrawShapeOnCanvas();   
         }
+        #endregion
 
+        #region Undo
         private void buttonUndo_Click(object sender, RoutedEventArgs e)
         {
             if (StackClass.ClearShape.Count != 0)
@@ -268,7 +268,9 @@ namespace PredmetniZadatak1
                 StackClass.ActiveShape.Push(temp);
             }
         }
+        #endregion
 
+        #region Redo
         private void buttonRedo_Click(object sender, RoutedEventArgs e)
         {
             if (StackClass.Undo.Count == 0)
@@ -277,7 +279,9 @@ namespace PredmetniZadatak1
             DrawingCanvas.Children.Add(shape.Draw());
             StackClass.ActiveShape.Push(shape);
         }
+        #endregion
 
+        #region Clear
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
             while (StackClass.ActiveShape.Count != 0)
@@ -286,5 +290,6 @@ namespace PredmetniZadatak1
                 DrawingCanvas.Children.Clear();
             }
         }
+        #endregion
     }
 }

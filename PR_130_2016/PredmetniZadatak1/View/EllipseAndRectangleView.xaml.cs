@@ -18,14 +18,17 @@ namespace PredmetniZadatak1.View
 {  
     public partial class EllipseAndRectangleView : Window
     {
+        #region Fields
         private EnumShape shapeToDraw;
         private Point pointToDraw;
-        private Button drawButton;
         private List<TextBox> textBox;
+        #endregion
 
+        #region Constructor
         public EllipseAndRectangleView(Point point)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            ChooseTitle();
             InitializeComponent();
 
             textBox = new List<TextBox>
@@ -34,14 +37,14 @@ namespace PredmetniZadatak1.View
                 textBoxHeight,
                 textBoxThickness
             };
-
+            // ?
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
-
-            pointToDraw = point;
-            ChooseTitle();
+            pointToDraw = point;           
         }
+        #endregion
 
+        #region Title
         public void ChooseTitle()
         {
             foreach (var item in MainWindow.dictionary)
@@ -63,6 +66,7 @@ namespace PredmetniZadatak1.View
                 }
             }
         }
+        #endregion
 
         #region Mouse position
         private void InitialLookButton(Button button)
@@ -123,9 +127,6 @@ namespace PredmetniZadatak1.View
         //}
         #endregion
 
-
-        #region Draw button
-
         #region Create shape
         bool ValidateColor(ComboBox comboBox)
         {
@@ -174,6 +175,7 @@ namespace PredmetniZadatak1.View
             selectedItem = (PropertyInfo)fillColor.SelectedItem;
             color = (Color)selectedItem.GetValue(null, null);
             SolidColorBrush fill = new SolidColorBrush(color);
+
             int width = Int32.Parse(textBoxWidth.Text);
             int height = Int32.Parse(textBoxHeight.Text);
             int Thickness = Int32.Parse(textBoxThickness.Text);
@@ -190,6 +192,7 @@ namespace PredmetniZadatak1.View
             selectedItem = (PropertyInfo)fillColor.SelectedItem;
             color = (Color)selectedItem.GetValue(null, null);
             SolidColorBrush fill = new SolidColorBrush(color);
+
             int width = Int32.Parse(textBoxWidth.Text);
             int height = Int32.Parse(textBoxHeight.Text);
             int Thickness = Int32.Parse(textBoxThickness.Text);
@@ -198,6 +201,7 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
+        #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {           
             TemplateShape ret = null;

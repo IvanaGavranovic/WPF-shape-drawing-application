@@ -16,21 +16,21 @@ using System.Windows.Shapes;
 
 namespace PredmetniZadatak1.View
 {
-    /// <summary>
-    /// Interaction logic for ImageView.xaml
-    /// </summary>
     public partial class ImageView : Window
     {
+        #region Fields
         private EnumShape shapeToDraw;
         private List<TextBox> textBox;
         private List<Button> buttons;
         private Point pointToDraw;
         private string imgPath;
+        #endregion
 
+        #region Constructor
         public ImageView(Point point)
-        {
-            Title = "Image window";
+        {           
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            Title = "Image window";
             InitializeComponent();
 
             textBox = new List<TextBox>
@@ -46,6 +46,9 @@ namespace PredmetniZadatak1.View
             pointToDraw = point;
             shapeToDraw = EnumShape.IMAGE;
         }
+        #endregion
+
+        #region Mouse position
         private void InitialLookButton(Button button)
         {
             Style style = FindResource("InitialLookButton") as Style;
@@ -69,7 +72,6 @@ namespace PredmetniZadatak1.View
                     DragMouseOverButton(item);
             }
         }
-
         private void MouseLeave(object sender, MouseEventArgs e)
         {
             foreach (var item in buttons)
@@ -99,7 +101,17 @@ namespace PredmetniZadatak1.View
                     TextboxStyle(item);
             }
         }
+        private void MouseLeaveTextBox(object sender, MouseEventArgs e)
+        {
+            foreach (var item in textBox)
+            {
+                if (!item.IsMouseOver)
+                    TextboxStyle(item);
+            }
+        }
+        #endregion
 
+        #region Create shape
         bool ValidateTexBox(TextBox textBox)
         {
             if (textBox.Text.Length == 0 || string.IsNullOrEmpty(textBox.Text))
@@ -141,8 +153,10 @@ namespace PredmetniZadatak1.View
             int width = Int32.Parse(textBoxWidth.Text);
             int height = Int32.Parse(textBoxHeight.Text);
             return new ImageShape(pointToDraw.X, pointToDraw.Y, width, height, imgPath);
-        }       
+        }
+        #endregion
 
+        #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
             TemplateShape ret = null;
@@ -158,7 +172,9 @@ namespace PredmetniZadatak1.View
             SelectedButton(buttonDraw);
             Close();
         }
+        #endregion
 
+        #region Choose button
         private void buttonChoose_Click(object sender, RoutedEventArgs e)
         {
             SelectedButton(buttonChoose);
@@ -175,9 +191,9 @@ namespace PredmetniZadatak1.View
                 logo.BeginInit();
                 logo.UriSource = new Uri(imgPath);
                 logo.EndInit();
-
                 imgImage.Source = logo;
             }
         }
+        #endregion
     }
 }

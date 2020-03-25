@@ -83,12 +83,26 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="40"/>
-            <Setter Property="Background" Value="#ffe6e6"/>
-            <Setter Property="BorderBrush" Value="#ff6666"/>
-            <Setter Property="Border.Background" Value="#ffe6e6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                                        <GradientStop Color="#ff5050" Offset="0"/>
+                                        <GradientStop Color="#ffe6e6" Offset="0.7"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
-                <Trigger Property="Border.IsMouseOver" Value="True">
-                    <Setter Property="Border.Background" Value="#ff8080" />
+                <Trigger Property="IsKeyboardFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#ffe6e6"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -97,8 +111,8 @@
         <Button x:Name="buttonChoose" Content="Choose Image" Margin="150,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonChoose_Click" />
         <Label Content="Width:" HorizontalAlignment="Left" Height="40" Margin="70,240,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
         <Label Content="Height:" HorizontalAlignment="Left" Height="40" Margin="70,290,0,0" VerticalAlignment="Top" Width="80" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
-        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="150,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox"/>
-        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="150,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox"/>
+        <TextBox x:Name="textBoxWidth" HorizontalAlignment="Left" Margin="150,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseMove="MouseEnterTextBox" MouseLeave="MouseLeaveTextBox"/>
+        <TextBox x:Name="textBoxHeight" HorizontalAlignment="Left" Margin="150,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseMove="MouseEnterTextBox" MouseLeave="MouseLeaveTextBox"/>
         <Button x:Name="buttonDraw" Content="Draw" Margin="150,370,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonDraw_Click"/>
         <Image Name="imgImage" HorizontalAlignment="Left" Height="130" Margin="150,100,0,0" VerticalAlignment="Top" Width="200"/>
     </Grid>

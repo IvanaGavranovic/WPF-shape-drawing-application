@@ -16,28 +16,30 @@ using System.Windows.Shapes;
 
 namespace PredmetniZadatak1.View
 {
-    /// <summary>
-    /// Interaction logic for PolygonView.xaml
-    /// </summary>
     public partial class PolygonView : Window
     {
+        #region Fields
         private EnumShape shapeToDraw;
         private List<Point> pointsForPolygon;
         private TextBox textBox;
         private Button drawButton;
+        #endregion
 
+        #region Constructor
         public PolygonView(List<Point> points)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            InitializeComponent();
-
             Title = "Drawing polygon";
+            InitializeComponent();
+       
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             pointsForPolygon = points;
             shapeToDraw = EnumShape.POLYGON;
         }
+        #endregion
 
+        #region Mouse position
         private void InitialLookButton(Button button)
         {
             Style style = FindResource("InitialLookButton") as Style;
@@ -82,8 +84,9 @@ namespace PredmetniZadatak1.View
             else
                 TextboxStyle(textBoxThickness);
         }
+        #endregion
 
-
+        #region Create Shape
         bool ValidateTexBox(TextBox textBox)
         {
             if (textBox.Text.Length == 0 || string.IsNullOrEmpty(textBox.Text))
@@ -122,7 +125,6 @@ namespace PredmetniZadatak1.View
             return true;
         }
 
-
         SolidColorBrush CreateColor(ComboBox comboBox)
         {
             var selectedItem = (PropertyInfo)comboBox.SelectedItem;
@@ -138,7 +140,9 @@ namespace PredmetniZadatak1.View
 
             return new PolygonShape(pointsForPolygon, Fill, border, borderTh);
         }
+        #endregion
 
+        #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
             TemplateShape ret = null;
@@ -154,6 +158,7 @@ namespace PredmetniZadatak1.View
             SelectedButton(buttonDraw);
             Close();
         }
+        #endregion
     }
 }
 
