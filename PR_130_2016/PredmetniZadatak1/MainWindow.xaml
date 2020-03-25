@@ -119,8 +119,7 @@
             <Button Name="buttonImage" Content="Image"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLookButton}" Click="buttonImage_Click" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
         </StackPanel>
 
-        <Canvas Name="DrawingCanvas" Background="#ffffff" Margin="27,60,27,60" PreviewMouseRightButtonDown="PreviewMouseRightButtonDown">
-            <!--<ContentControl Content="{Binding CurrentView, Mode=OneWay}" />-->
+        <Canvas Name="DrawingCanvas" Background="#ffffff" Margin="27,60,27,60" PreviewMouseRightButtonDown="PreviewMouseRightButtonDown" PreviewMouseLeftButtonDown="PreviewMouseLeftButtonDown">
         </Canvas>
 
         <StackPanel Height="40" VerticalAlignment="Bottom" Margin="85,0,85,10" Orientation="Horizontal">

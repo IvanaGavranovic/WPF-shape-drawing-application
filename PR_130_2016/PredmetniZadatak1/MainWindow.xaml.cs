@@ -24,6 +24,8 @@ namespace PredmetniZadatak1
     {
         public static Dictionary<string, bool> dictionary;
         static List<Button> allButtons;
+        private static bool enableDrawingPoinstForPolygon;
+        static private List<Point> pointsForPolygon;
 
         public MainWindow()
         {
@@ -47,6 +49,8 @@ namespace PredmetniZadatak1
                 buttonRedo,
                 buttonClear
             };
+            enableDrawingPoinstForPolygon = false;
+            pointsForPolygon = new List<Point>();
         }
         #region Button style
         private void InitialLookButton(Button button)
@@ -198,10 +202,49 @@ namespace PredmetniZadatak1
                         ImageView IView = new ImageView(point);
                         IView.ShowDialog();
                         DrawShapeOnCanvas();
-                    }    
+                    }   
+                    else if(item.Key.Equals(buttonPolygon.Name) && enableDrawingPoinstForPolygon)
+                    {
+                        pointsForPolygon.Add(e.GetPosition(DrawingCanvas));
+
+                        return;
+                    }
                 }
             }
-        }            
+        }
+        void EnebleDrawingPlygon()
+        {
+            if (!enableDrawingPoinstForPolygon)
+            {
+                enableDrawingPoinstForPolygon = true;
+                pointsForPolygon = new List<Point>();
+            }
+            else
+            {
+                DisableDrawingPoint();
+            }
+
+        }
+        void DisableDrawingPoint()
+        {
+            if (enableDrawingPoinstForPolygon)
+            {
+                enableDrawingPoinstForPolygon = false;
+            }
+        }
+
+        private void PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!enableDrawingPoinstForPolygon)
+                return;
+
+            pointsForPolygon = new List<Point>(pointsForPolygon);
+            PolygonView PView = new PolygonView(pointsForPolygon);
+            PView.ShowDialog();
+            pointsForPolygon = new List<Point>();
+            DrawShapeOnCanvas();   
+        }
+
         private void buttonUndo_Click(object sender, RoutedEventArgs e)
         {
             if (StackClass.ClearShape.Count != 0)
