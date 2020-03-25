@@ -155,11 +155,13 @@ namespace PredmetniZadatak1.View
                     break;
             }
             StackClass.NewShape = ret;
+            SelectedButton(buttonDraw);
             Close();
         }
 
         private void buttonChoose_Click(object sender, RoutedEventArgs e)
         {
+            SelectedButton(buttonChoose);
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png|All files (*.*)|*.*";
 

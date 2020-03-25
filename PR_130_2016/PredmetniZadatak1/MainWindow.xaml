@@ -128,7 +128,7 @@
             <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
             <Button Name="buttonRedo" Content="Redo"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="buttonRedo_Click"/>
             <TextBlock TextWrapping="Wrap" FontSize="50" Text=" "/>
-            <Button Name="buttonClear" Content="Clear"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave"/>
+            <Button Name="buttonClear" Content="Clear"  Width="103" FontSize="16" FontFamily="Global serif" Style="{StaticResource InitialLook2Button}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" Click="buttonClear_Click"/>
         </StackPanel>
     </Grid>
 </Window>

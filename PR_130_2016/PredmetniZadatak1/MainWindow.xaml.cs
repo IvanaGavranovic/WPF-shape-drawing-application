@@ -87,7 +87,7 @@ namespace PredmetniZadatak1
         // cilj -> dobiti dictionary sa 1 button-om cija je vrijednost true, svi ostali false
         private void SelectButton(string buttonName)
         {
-            // kliknuti dugmic ce promijeniti svoju vrijednost(boju)
+            // kliknuti dugmic ce promijeniti svoju vrijednost
             foreach (var item in dictionary)
             {
                 if (item.Key.Equals(buttonName))
@@ -204,12 +204,26 @@ namespace PredmetniZadatak1
         }            
         private void buttonUndo_Click(object sender, RoutedEventArgs e)
         {
+            if (StackClass.ClearShape.Count != 0)
+            {
+                UndoClearAction();
+                return;
+            }    
             if (StackClass.ActiveShape.Count == 0)
                 return;
             TemplateShape shape = StackClass.ActiveShape.Pop();
 
             DrawingCanvas.Children.RemoveAt(DrawingCanvas.Children.Count - 1);
             StackClass.Undo.Push(shape);
+        }
+        void UndoClearAction()
+        {
+            while (StackClass.ClearShape.Count != 0)
+            {
+                TemplateShape temp = StackClass.ClearShape.Pop();
+                DrawingCanvas.Children.Add(temp.Draw());
+                StackClass.ActiveShape.Push(temp);
+            }
         }
 
         private void buttonRedo_Click(object sender, RoutedEventArgs e)
@@ -219,6 +233,15 @@ namespace PredmetniZadatak1
             TemplateShape shape = StackClass.Undo.Pop();
             DrawingCanvas.Children.Add(shape.Draw());
             StackClass.ActiveShape.Push(shape);
+        }
+
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            while (StackClass.ActiveShape.Count != 0)
+            {
+                StackClass.ClearShape.Push(StackClass.ActiveShape.Pop());
+                DrawingCanvas.Children.Clear();
+            }
         }
     }
 }

@@ -199,7 +199,7 @@ namespace PredmetniZadatak1.View
         #endregion
 
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             TemplateShape ret = null;
             switch (shapeToDraw)
             {
@@ -216,6 +216,7 @@ namespace PredmetniZadatak1.View
                     break;
             }
             StackClass.NewShape = ret;
+            SelectedButton(buttonDraw);
             Close();
         }
         #endregion
