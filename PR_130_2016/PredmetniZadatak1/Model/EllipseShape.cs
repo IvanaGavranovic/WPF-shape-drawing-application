@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PredmetniZadatak1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -26,6 +28,8 @@ namespace PredmetniZadatak1.Model
        
         public override Shape Draw()
         {
+            if (Shape != null)
+                return Shape;
             Ellipse ellipse = new Ellipse();
             ellipse.Height = Height;
             ellipse.Width = Width;
@@ -33,7 +37,27 @@ namespace PredmetniZadatak1.Model
             ellipse.Stroke = BorderColor;
             ellipse.StrokeThickness = (double)BorderThickness;
             ellipse.Margin = new System.Windows.Thickness(coordinates.X_coordinate, coordinates.Y_coordinate, 0, 0);
+            ellipse.MouseLeftButtonDown += EllipseMouseLeftButtonDown;
+            Shape = ellipse;
             return ellipse;
+        }
+
+        private void EllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.RECTANGLE);
+            ERView.ShowDialog();
+        }
+
+        public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
+        {
+            if (Shape == null)
+                return;
+            Shape.Fill = fillColor;
+            Shape.Stroke = borderColor;
+            Shape.StrokeThickness = borderThickness;
+            FillColor = fillColor;
+            BorderColor = borderColor;
+            BorderThickness = borderThickness;
         }
     }
 }

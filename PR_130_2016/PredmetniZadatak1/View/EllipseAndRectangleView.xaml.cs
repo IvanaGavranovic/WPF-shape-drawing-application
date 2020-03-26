@@ -22,7 +22,7 @@ namespace PredmetniZadatak1.View
         private EnumShape shapeToDraw;
         private Point pointToDraw;
         private List<TextBox> textBox;
-        TemplateShape shapeToChange;
+        TemplateShape shapeToUpdate;
         #endregion
 
         #region Constructor
@@ -45,7 +45,29 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
-        #region Title
+        #region Constructor for Update
+        public EllipseAndRectangleView(TemplateShape shape, EnumShape enumShape)
+        {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            ChooseTitleToUpdate();
+            InitializeComponent();
+
+            shapeToUpdate = shape;
+            shapeToDraw = enumShape;
+
+            textBox = new List<TextBox>
+            {
+                textBoxWidth,
+                textBoxHeight,
+                textBoxThickness
+            };
+            fillColor.ItemsSource = typeof(Colors).GetProperties();
+            borderColor.ItemsSource = typeof(Colors).GetProperties();
+
+        }
+        #endregion
+
+        #region Titles
         public void ChooseTitle()
         {
             foreach (var item in MainWindow.dictionary)
@@ -66,6 +88,11 @@ namespace PredmetniZadatak1.View
                     }
                 }
             }
+        }
+
+        void ChooseTitleToUpdate()
+        {
+            Title = "Update the " + shapeToDraw.ToString();
         }
         #endregion
 
@@ -202,6 +229,36 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
+        #region Update shape
+        void UpdateRectangle(RectangleShape rectangle)
+        {
+            var selectedItem = (PropertyInfo)borderColor.SelectedItem;
+            Color color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush border = new SolidColorBrush(color);
+
+            selectedItem = (PropertyInfo)fillColor.SelectedItem;
+            color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush fill = new SolidColorBrush(color);
+            int Thickness = Int32.Parse(textBoxThickness.Text);
+
+            rectangle.UpdateShape(fill, border, Thickness);
+        }
+
+        void UpdateEllipse(EllipseShape ellipse)
+        {
+            var selectedItem = (PropertyInfo)borderColor.SelectedItem;
+            Color color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush border = new SolidColorBrush(color);
+
+            selectedItem = (PropertyInfo)fillColor.SelectedItem;
+            color = (Color)selectedItem.GetValue(null, null);
+            SolidColorBrush fill = new SolidColorBrush(color);
+            int Thickness = Int32.Parse(textBoxThickness.Text);
+
+            ellipse.UpdateShape(fill, border, Thickness);
+        }
+        #endregion
+
         #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {           
@@ -212,7 +269,7 @@ namespace PredmetniZadatak1.View
                     if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
                         return;
                     ret = CreateEllipse();
-
+                    //UpdateEllipse((MyEllipse)ShapeToChange);
                     break;
                 case EnumShape.RECTANGLE:
                     if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
@@ -222,6 +279,7 @@ namespace PredmetniZadatak1.View
             }
             StackClass.NewShape = ret;
             SelectedButton(buttonDraw);
+            //MainWindow.UpdateShapeDel(ShapeToUpdate);
             Close();
         }
         #endregion

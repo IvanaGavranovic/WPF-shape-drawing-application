@@ -3,6 +3,7 @@ using PredmetniZadatak1.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +25,8 @@ namespace PredmetniZadatak1
         static List<Button> allButtons;
         private static bool enableDrawingPoinstForPolygon;
         static private List<Point> pointsForPolygon;
+        public delegate void Del(TemplateShape shape);
+        public static Del UpdateShapeDel;
         #endregion
 
         #region Constructor
@@ -31,6 +34,7 @@ namespace PredmetniZadatak1
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             Title = "Drawing window";
+            UpdateShapeDel = UpdateShapeMethod;
             InitializeComponent();         
             dictionary = new Dictionary<string, bool>
             {
@@ -174,7 +178,7 @@ namespace PredmetniZadatak1
                     InitialLook2Button(item);
         }
         #endregion
-        //?
+        
         #region Draw shape
         void DrawShapeOnCanvas()
         {
@@ -289,6 +293,16 @@ namespace PredmetniZadatak1
                 StackClass.ClearShape.Push(StackClass.ActiveShape.Pop());
                 DrawingCanvas.Children.Clear();
             }
+        }
+        #endregion
+
+        #region Update shape
+        public void UpdateShapeMethod(TemplateShape shape)
+        {
+            int index = DrawingCanvas.Children.IndexOf(shape.Shape);
+            DrawingCanvas.Children.RemoveAt(index);
+            DrawingCanvas.Children.Insert(index, shape.Shape);
+
         }
         #endregion
     }

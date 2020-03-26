@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -36,15 +37,15 @@ namespace PredmetniZadatak1.Model
             rectangle.Stroke = BorderColor;
             rectangle.StrokeThickness = (double)BorderThickness;
             rectangle.Margin = new System.Windows.Thickness(coordinates.X_coordinate, coordinates.Y_coordinate, 0, 0);
-            //rectangle.MouseLeftButtonDown += RectangleMouseLeftButtonDown;
-            //Shape = rectangle;
+            rectangle.MouseLeftButtonDown += RectangleMouseLeftButtonDown;
+            Shape = rectangle;
             return rectangle;
         }
-        //private void RectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    EllipseAndRectangleView ERView= new EllipseAndRectangleView();
-        //    ERView.ShowDialog();
-        //}
+        private void RectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.RECTANGLE);
+            ERView.ShowDialog();
+        }
 
         public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
         {
