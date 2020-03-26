@@ -23,6 +23,7 @@ namespace PredmetniZadatak1.View
         private List<Point> pointsForPolygon;
         private TextBox textBox;
         private Button drawButton;
+        TemplateShape shapeToUpdate;
         #endregion
 
         #region Constructor
@@ -36,6 +37,21 @@ namespace PredmetniZadatak1.View
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             pointsForPolygon = points;
             shapeToDraw = EnumShape.POLYGON;
+            buttonDraw.Click += buttonDraw_Click;
+        }
+        #endregion
+
+        #region Constructor for update
+        public PolygonView(TemplateShape shape, EnumShape enumShape)
+        {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            Title = "Update polygon";
+            InitializeComponent();
+
+            fillColor.ItemsSource = typeof(Colors).GetProperties();
+            borderColor.ItemsSource = typeof(Colors).GetProperties();
+            shapeToDraw = EnumShape.POLYGON;
+            buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
 
@@ -142,6 +158,17 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
+        #region Update shape
+        void UpdatePolygon(PolygonShape polygon)
+        {
+            SolidColorBrush border = CreateColor(borderColor);
+            SolidColorBrush fill = CreateColor(fillColor);
+            int Thickness = Int32.Parse(textBoxThickness.Text);
+
+            polygon.UpdateShape(fill, border, Thickness);
+        }
+        #endregion
+
         #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
@@ -155,6 +182,21 @@ namespace PredmetniZadatak1.View
                     break;
             }
             StackClass.NewShape = ret;
+            SelectedButton(buttonDraw);
+            Close();
+        }
+
+        private void buttonDrawUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            switch (shapeToDraw)
+            {
+                case EnumShape.POLYGON:
+                    if (!(ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                        return;
+                    UpdatePolygon((PolygonShape)shapeToUpdate);
+                    break;
+            }
+            MainWindow.UpdateShapeDel(shapeToUpdate);
             SelectedButton(buttonDraw);
             Close();
         }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PredmetniZadatak1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -32,19 +34,21 @@ namespace PredmetniZadatak1.Model
             polygon.Fill = FillColor;
             polygon.StrokeThickness = BorderThickness;
             polygon.Points = PointColection;
-            polygon.MouseLeftButtonDown += Polygon_MouseLeftButtonDown;
+            polygon.MouseLeftButtonDown += PolygonMouseLeftButtonDown;
             Shape = polygon;
             return Shape;
         }
 
-        //private void UpdatePolygon_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        //{
-        //    ChangePropertiesWindow changePropertiesWindow = new ChangePropertiesWindow(this, MyShapeEnum.Polygon);
-        //    changePropertiesWindow.ShowDialog();
+        private void PolygonMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PolygonView PView = new PolygonView(this, EnumShape.POLYGON);
+            PView.ShowDialog();
+        }
 
-        //}
         public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
         {
+            if (Shape == null)
+                return;
             Shape.Stroke = borderColor;
             Shape.Fill = fillColor;
             Shape.StrokeThickness = borderThickness;

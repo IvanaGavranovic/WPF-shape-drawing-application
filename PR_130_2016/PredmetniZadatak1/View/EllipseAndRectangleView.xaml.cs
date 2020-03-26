@@ -41,15 +41,16 @@ namespace PredmetniZadatak1.View
             
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
-            pointToDraw = point;           
+            pointToDraw = point;
+            buttonDraw.Click += buttonDraw_Click;
         }
         #endregion
 
-        #region Constructor for Update
+        #region Constructor for update
         public EllipseAndRectangleView(TemplateShape shape, EnumShape enumShape)
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            ChooseTitleToUpdate();
+            Title = "Update shape";
             InitializeComponent();
 
             shapeToUpdate = shape;
@@ -63,7 +64,7 @@ namespace PredmetniZadatak1.View
             };
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
-
+            buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
 
@@ -89,11 +90,7 @@ namespace PredmetniZadatak1.View
                 }
             }
         }
-
-        void ChooseTitleToUpdate()
-        {
-            Title = "Update the " + shapeToDraw.ToString();
-        }
+      
         #endregion
 
         #region Mouse position
@@ -208,7 +205,7 @@ namespace PredmetniZadatak1.View
             int height = Int32.Parse(textBoxHeight.Text);
             int Thickness = Int32.Parse(textBoxThickness.Text);
 
-            return new EllipseShape(pointToDraw.X, pointToDraw.Y, width, height, border, fill, Thickness);
+            return new EllipseShape(pointToDraw.X, pointToDraw.Y, width, height, fill, border, Thickness);
         }
 
         TemplateShape CreateRectangle()
@@ -225,7 +222,7 @@ namespace PredmetniZadatak1.View
             int height = Int32.Parse(textBoxHeight.Text);
             int Thickness = Int32.Parse(textBoxThickness.Text);
 
-            return new RectangleShape(pointToDraw.X, pointToDraw.Y, width, height, border, fill, Thickness);
+            return new RectangleShape(pointToDraw.X, pointToDraw.Y, width, height, fill, border, Thickness);
         }
         #endregion
 
@@ -269,7 +266,6 @@ namespace PredmetniZadatak1.View
                     if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
                         return;
                     ret = CreateEllipse();
-                    //UpdateEllipse((MyEllipse)ShapeToChange);
                     break;
                 case EnumShape.RECTANGLE:
                     if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
@@ -279,7 +275,26 @@ namespace PredmetniZadatak1.View
             }
             StackClass.NewShape = ret;
             SelectedButton(buttonDraw);
-            //MainWindow.UpdateShapeDel(ShapeToUpdate);
+            Close();
+        }
+
+        public void buttonDrawUpdate_Click(object sender, RoutedEventArgs e)
+        {         
+            switch (shapeToDraw)
+            {
+                case EnumShape.ELLIPSE:
+                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                        return;
+                    UpdateEllipse((EllipseShape)shapeToUpdate);
+                    break;
+                case EnumShape.RECTANGLE:
+                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                        return;
+                    UpdateRectangle((RectangleShape)shapeToUpdate);
+                    break;
+            }
+            MainWindow.UpdateShapeDel(shapeToUpdate);
+            SelectedButton(buttonDraw);
             Close();
         }
         #endregion

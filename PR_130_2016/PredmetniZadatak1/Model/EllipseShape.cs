@@ -44,7 +44,7 @@ namespace PredmetniZadatak1.Model
 
         private void EllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.RECTANGLE);
+            EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.ELLIPSE);
             ERView.ShowDialog();
         }
 

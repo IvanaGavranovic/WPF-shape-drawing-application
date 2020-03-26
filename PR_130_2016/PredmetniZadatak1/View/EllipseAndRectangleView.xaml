@@ -461,7 +461,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBox x:Name="textBoxThickness" HorizontalAlignment="Left" Margin="200,250,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Style="{StaticResource TextboxStyle}" MouseEnter="MouseEnterTextBox"/>
-        <Button x:Name="buttonDraw" Content="Draw" Margin="200,330,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif" Click="buttonDraw_Click"/>
+        <Button x:Name="buttonDraw" Content="Draw" Margin="200,330,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="40" Style="{StaticResource InitialLookButton}" MouseEnter="MouseEnter" MouseLeave="MouseLeave" FontSize="16" FontFamily="Global serif"/>
 
     </Grid>
 </Window>
