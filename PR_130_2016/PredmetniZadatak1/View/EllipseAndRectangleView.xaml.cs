@@ -74,9 +74,51 @@ namespace PredmetniZadatak1.View
             labelHeight.IsEnabled = false;
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
+
+            OldData();
+
             buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
+
+        #region Old data
+        void DataInTextBox(TextBox textBox, double number)
+        {
+            textBox.Text = number.ToString();
+        }
+        private string GetColorName(SolidColorBrush brush)
+        {
+            var results = typeof(Colors).GetProperties().Where(
+             p => (Color)p.GetValue(null, null) == brush.Color).Select(p => p.Name);
+            return results.Count() > 0 ? results.First() : String.Empty;
+        }
+        void SelectColorInCombobox(ComboBox comboBox, Brush brush)
+        {
+            var list = typeof(Colors).GetProperties();
+            string temp = GetColorName((SolidColorBrush)brush);
+            var item = list.First(x => x.Name == temp);
+            comboBox.SelectedItem = item;
+        }
+        void OldData()
+        {
+            switch (shapeToDraw)
+            {
+                case EnumShape.RECTANGLE:
+                    Rectangle rectangle = (Rectangle)shapeToUpdate.Shape;
+                    DataInTextBox(textBoxThickness, rectangle.StrokeThickness);
+                    SelectColorInCombobox(borderColor, rectangle.Stroke);
+                    SelectColorInCombobox(fillColor, rectangle.Fill);
+                    break;
+                case EnumShape.ELLIPSE:
+                    Ellipse ellipse = (Ellipse)shapeToUpdate.Shape;
+                    DataInTextBox(textBoxThickness, ellipse.StrokeThickness);
+                    SelectColorInCombobox(borderColor, ellipse.Stroke);
+                    SelectColorInCombobox(fillColor, ellipse.Fill);
+                    break;            
+            }
+        }
+        #endregion
+
 
         #region Titles
         public void ChooseTitle()

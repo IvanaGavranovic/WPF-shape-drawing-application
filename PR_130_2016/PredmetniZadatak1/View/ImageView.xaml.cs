@@ -81,9 +81,26 @@ namespace PredmetniZadatak1.View
             labelWidth.IsEnabled = false;
             labelHeight.IsEnabled = false;
             shapeToDraw = EnumShape.IMAGE;
+
+            OldImageData();
+
             buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
+        void DataInImage(string path)
+        {
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+            logo.UriSource = new Uri(path);
+
+            logo.EndInit();
+            imgImage.Source = logo;
+        }
+        void OldImageData()
+        {
+            ImageShape shape = (ImageShape)shapeToUpdate;
+            DataInImage(shape.Path);
+        }
 
         #region Mouse position
         private void InitialLookButton(Button button)

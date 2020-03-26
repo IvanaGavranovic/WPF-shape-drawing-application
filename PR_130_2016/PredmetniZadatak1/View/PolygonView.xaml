@@ -84,8 +84,9 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="40"/>
+            <Setter Property="FontFamily" Value="Global serif"/>
             <Setter Property="Background" Value="#ffe6e6"/>
-            <Setter Property="BorderBrush" Value="#ff6666"/>
+            <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Border.Background" Value="#ffe6e6"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">

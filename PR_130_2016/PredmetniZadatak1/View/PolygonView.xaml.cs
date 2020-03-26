@@ -53,7 +53,37 @@ namespace PredmetniZadatak1.View
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             shapeToDraw = EnumShape.POLYGON;
+
+            OldPolygonData();
+
             buttonDraw.Click += buttonDrawUpdate_Click;
+        }
+        #endregion
+
+        #region Old data
+        void DataInTextBox(TextBox textBox, double number)
+        {
+            textBox.Text = number.ToString();
+        }
+        private string GetColorName(SolidColorBrush brush)
+        {
+            var results = typeof(Colors).GetProperties().Where(
+             p => (Color)p.GetValue(null, null) == brush.Color).Select(p => p.Name);
+            return results.Count() > 0 ? results.First() : String.Empty;
+        }
+        void SelectColorInCombobox(ComboBox comboBox, Brush brush)
+        {
+            var list = typeof(Colors).GetProperties();
+            string temp = GetColorName((SolidColorBrush)brush);
+            var item = list.First(x => x.Name == temp);
+            comboBox.SelectedItem = item;
+        }
+        void OldPolygonData()
+        {
+            Polygon shape = (Polygon)shapeToUpdate.Shape;
+            DataInTextBox(textBoxThickness, shape.StrokeThickness);
+            SelectColorInCombobox(borderColor, shape.Stroke);
+            SelectColorInCombobox(fillColor, shape.Fill);
         }
         #endregion
 
