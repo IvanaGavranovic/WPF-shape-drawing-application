@@ -18,7 +18,7 @@ namespace PredmetniZadatak1.Model
             pointColection = new PointCollection(points);
         }
 
-        private void RetVal_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Polygon_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             throw new NotImplementedException();
         }
@@ -27,14 +27,30 @@ namespace PredmetniZadatak1.Model
         {
             if (Shape != null)
                 return Shape;
-            Polygon retVal = new Polygon();
-            retVal.Stroke = BorderColor;
-            retVal.Fill = FillColor;
-            retVal.StrokeThickness = BorderThickness;
-            retVal.Points = PointColection;
-            retVal.MouseLeftButtonDown += RetVal_MouseLeftButtonDown;
-            Shape = retVal;
+            Polygon polygon = new Polygon();
+            polygon.Stroke = BorderColor;
+            polygon.Fill = FillColor;
+            polygon.StrokeThickness = BorderThickness;
+            polygon.Points = PointColection;
+            polygon.MouseLeftButtonDown += Polygon_MouseLeftButtonDown;
+            Shape = polygon;
             return Shape;
+        }
+
+        //private void UpdatePolygon_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    ChangePropertiesWindow changePropertiesWindow = new ChangePropertiesWindow(this, MyShapeEnum.Polygon);
+        //    changePropertiesWindow.ShowDialog();
+
+        //}
+        public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
+        {
+            Shape.Stroke = borderColor;
+            Shape.Fill = fillColor;
+            Shape.StrokeThickness = borderThickness;
+            BorderThickness = borderThickness;
+            FillColor = fillColor;
+            BorderColor = borderColor;
         }
     }
 }

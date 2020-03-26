@@ -22,6 +22,7 @@ namespace PredmetniZadatak1.View
         private EnumShape shapeToDraw;
         private Point pointToDraw;
         private List<TextBox> textBox;
+        TemplateShape shapeToChange;
         #endregion
 
         #region Constructor
@@ -37,7 +38,7 @@ namespace PredmetniZadatak1.View
                 textBoxHeight,
                 textBoxThickness
             };
-            // ?
+            
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             pointToDraw = point;           

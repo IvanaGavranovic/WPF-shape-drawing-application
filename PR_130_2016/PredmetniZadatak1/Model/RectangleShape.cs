@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PredmetniZadatak1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace PredmetniZadatak1.Model
 
         public override Shape Draw()
         {
+            if (Shape != null)
+                return Shape;
             Rectangle rectangle = new Rectangle();
             rectangle.Height = Height;
             rectangle.Width = Width;
@@ -33,7 +36,26 @@ namespace PredmetniZadatak1.Model
             rectangle.Stroke = BorderColor;
             rectangle.StrokeThickness = (double)BorderThickness;
             rectangle.Margin = new System.Windows.Thickness(coordinates.X_coordinate, coordinates.Y_coordinate, 0, 0);
+            //rectangle.MouseLeftButtonDown += RectangleMouseLeftButtonDown;
+            //Shape = rectangle;
             return rectangle;
+        }
+        //private void RectangleMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    EllipseAndRectangleView ERView= new EllipseAndRectangleView();
+        //    ERView.ShowDialog();
+        //}
+
+        public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
+        {
+            if (Shape == null)
+                return;
+            Shape.Fill = fillColor;
+            Shape.Stroke = borderColor;
+            Shape.StrokeThickness = borderThickness;
+            FillColor = fillColor;
+            BorderColor = borderColor;
+            BorderThickness = borderThickness;
         }
     }
 }
