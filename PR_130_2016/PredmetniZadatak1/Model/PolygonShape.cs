@@ -41,7 +41,7 @@ namespace PredmetniZadatak1.Model
 
         private void PolygonMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            PolygonView PView = new PolygonView(this, EnumShape.POLYGON);
+            PolygonView PView = new PolygonView(this, EnumShape.POLYGON);                  
             PView.ShowDialog();
         }
 

@@ -22,15 +22,16 @@ namespace PredmetniZadatak1.View
         private EnumShape shapeToDraw;
         private Point pointToDraw;
         private List<TextBox> textBox;
+        private List<Label> label;
         TemplateShape shapeToUpdate;
         #endregion
 
         #region Constructor
         public EllipseAndRectangleView(Point point)
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            ChooseTitle();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;       
             InitializeComponent();
+            ChooseTitle();
 
             textBox = new List<TextBox>
             {
@@ -49,9 +50,9 @@ namespace PredmetniZadatak1.View
         #region Constructor for update
         public EllipseAndRectangleView(TemplateShape shape, EnumShape enumShape)
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            Title = "Update shape";
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;           
             InitializeComponent();
+            Title = "Update shape";
 
             shapeToUpdate = shape;
             shapeToDraw = enumShape;
@@ -62,6 +63,15 @@ namespace PredmetniZadatak1.View
                 textBoxHeight,
                 textBoxThickness
             };
+            label = new List<Label>
+            {
+                labelWidth,
+                labelHeight
+            };
+            textBoxHeight.IsEnabled = false;
+            textBoxWidth.IsEnabled = false;
+            labelWidth.IsEnabled = false;
+            labelHeight.IsEnabled = false;
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             buttonDraw.Click += buttonDrawUpdate_Click;
@@ -79,12 +89,12 @@ namespace PredmetniZadatak1.View
                     {
                         case "buttonEllipse":
                             Title = "Drawing an ellipse";
-                            shapeToDraw = EnumShape.ELLIPSE;
+                            shapeToDraw = EnumShape.ELLIPSE;                            
                             break;
 
                         case "buttonRectangle":
                             Title = "Drawing a rectangle";
-                            shapeToDraw = EnumShape.RECTANGLE;
+                            shapeToDraw = EnumShape.RECTANGLE;                          
                             break;
                     }
                 }
@@ -283,12 +293,12 @@ namespace PredmetniZadatak1.View
             switch (shapeToDraw)
             {
                 case EnumShape.ELLIPSE:
-                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                    if (!(ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
                         return;
                     UpdateEllipse((EllipseShape)shapeToUpdate);
                     break;
                 case EnumShape.RECTANGLE:
-                    if (!(ValidateTexBox(textBoxWidth) && ValidateTexBox(textBoxHeight) && ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
+                    if (!(ValidateTexBox(textBoxThickness) && ValidateColor(borderColor) && ValidateColor(fillColor)))
                         return;
                     UpdateRectangle((RectangleShape)shapeToUpdate);
                     break;

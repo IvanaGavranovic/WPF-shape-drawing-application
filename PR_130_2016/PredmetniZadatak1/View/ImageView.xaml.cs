@@ -22,16 +22,18 @@ namespace PredmetniZadatak1.View
         private EnumShape shapeToDraw;
         private List<TextBox> textBox;
         private List<Button> buttons;
+        private List<Label> label;
         private Point pointToDraw;
         private string imgPath;
+        TemplateShape shapeToUpdate;
         #endregion
 
         #region Constructor
         public ImageView(Point point)
         {           
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            Title = "Image window";
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;          
             InitializeComponent();
+            Title = "Image window";
 
             textBox = new List<TextBox>
             {
@@ -45,6 +47,41 @@ namespace PredmetniZadatak1.View
             };
             pointToDraw = point;
             shapeToDraw = EnumShape.IMAGE;
+
+            buttonDraw.Click += buttonDraw_Click;
+        }
+        #endregion
+
+        #region Constructor for update
+        public ImageView(TemplateShape shape, EnumShape enumShape)
+        {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;      
+            InitializeComponent();
+            Title = "Update image window";
+
+            shapeToUpdate = shape;
+            shapeToDraw = enumShape;
+            textBox = new List<TextBox>
+            {
+                textBoxWidth,
+                textBoxHeight,
+            };
+            buttons = new List<Button>
+            {
+                buttonChoose,
+                buttonDraw
+            };
+            label = new List<Label>
+            {
+                labelWidth,
+                labelHeight
+            };
+            textBoxHeight.IsEnabled = false;
+            textBoxWidth.IsEnabled = false;
+            labelWidth.IsEnabled = false;
+            labelHeight.IsEnabled = false;
+            shapeToDraw = EnumShape.IMAGE;
+            buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
 
@@ -156,6 +193,13 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
+        #region Update shape
+        void UpdateImage(ImageShape image)
+        {
+            image.UpdateShape(imgPath);
+        }
+        #endregion
+
         #region Draw button
         private void buttonDraw_Click(object sender, RoutedEventArgs e)
         {
@@ -169,6 +213,21 @@ namespace PredmetniZadatak1.View
                     break;
             }
             StackClass.NewShape = ret;
+            SelectedButton(buttonDraw);
+            Close();
+        }
+
+        private void buttonDrawUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            switch (shapeToDraw)
+            {
+                case EnumShape.IMAGE:
+                    if (!(ValidateImagePath()))
+                        return;
+                    UpdateImage((ImageShape)shapeToUpdate);
+                    break;
+            }
+            MainWindow.UpdateShapeDel(shapeToUpdate);
             SelectedButton(buttonDraw);
             Close();
         }

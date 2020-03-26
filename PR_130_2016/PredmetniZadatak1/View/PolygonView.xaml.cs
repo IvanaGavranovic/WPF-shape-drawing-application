@@ -29,10 +29,10 @@ namespace PredmetniZadatak1.View
         #region Constructor
         public PolygonView(List<Point> points)
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            Title = "Drawing polygon";
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;          
             InitializeComponent();
-       
+            Title = "Drawing polygon";
+
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             pointsForPolygon = points;
@@ -44,10 +44,12 @@ namespace PredmetniZadatak1.View
         #region Constructor for update
         public PolygonView(TemplateShape shape, EnumShape enumShape)
         {
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            Title = "Update polygon";
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;          
             InitializeComponent();
+            Title = "Update polygon window";
 
+            shapeToUpdate = shape;
+            shapeToDraw = enumShape;
             fillColor.ItemsSource = typeof(Colors).GetProperties();
             borderColor.ItemsSource = typeof(Colors).GetProperties();
             shapeToDraw = EnumShape.POLYGON;

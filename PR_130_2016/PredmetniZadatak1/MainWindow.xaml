@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PredmetniZadatak1"
         xmlns:View="clr-namespace:PredmetniZadatak1.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="520">
+        Title="Drawing window" Height="500" Width="520">
     <Window.Resources>
         <Style x:Key="InitialLookButton" TargetType="Button">
             <Setter Property="Template">

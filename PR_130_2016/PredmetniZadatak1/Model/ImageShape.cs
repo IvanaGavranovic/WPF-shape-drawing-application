@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PredmetniZadatak1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,18 +34,41 @@ namespace PredmetniZadatak1.Model
 
         public override Shape Draw()
         {
-            System.Windows.Shapes.Rectangle retVal = new System.Windows.Shapes.Rectangle();
-            retVal.Margin = new System.Windows.Thickness(coordinates.X_coordinate, coordinates.Y_coordinate, 0, 0);
-            retVal.Height = Height;
-            retVal.Width = Width;
+            if (Shape != null)
+                return Shape;
+            Rectangle shapeImage = new Rectangle();
+            shapeImage.Margin = new Thickness(coordinates.X_coordinate, coordinates.Y_coordinate, 0, 0);
+            shapeImage.Height = Height;
+            shapeImage.Width = Width;
 
-            retVal.Stroke = new SolidColorBrush();
-            retVal.StrokeThickness = 0;
-            retVal.Fill = new ImageBrush
+            shapeImage.Stroke = new SolidColorBrush();
+            shapeImage.StrokeThickness = 0;
+            shapeImage.Fill = new ImageBrush
             {
                 ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute))
             };
-            return retVal;
-        }       
+            shapeImage.MouseLeftButtonDown += ImageMouseLeftButtonDown;
+            Shape = shapeImage;
+            return shapeImage;
+        }
+        private void ImageMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ImageView IView = new ImageView(this, EnumShape.IMAGE);
+            IView.ShowDialog();
+
+        }
+        public void UpdateShape(string path)
+        {
+            if (Shape == null)
+                return;
+
+            Shape.Fill = new ImageBrush
+            {
+                ImageSource = new BitmapImage(new Uri(path, UriKind.Absolute))
+            };
+
+            Path = path;
+
+        }
     }
 }

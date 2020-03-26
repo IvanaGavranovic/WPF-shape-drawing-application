@@ -432,8 +432,8 @@
         <!-- Amin -->
     </Window.Resources>
     <Grid Background="#ffe6e6">
-        <Label Content="Width:" HorizontalAlignment="Left" Height="40" Margin="80,50,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
-        <Label Content="Height:" HorizontalAlignment="Left" Height="40" Margin="80,100,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
+        <Label Name="labelWidth" Content="Width:" HorizontalAlignment="Left" Height="40" Margin="80,50,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />
+        <Label Name="labelHeight" Content="Height:" HorizontalAlignment="Left" Height="40" Margin="80,100,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif"  />
         <Label Content="FillColor:" HorizontalAlignment="Left" Height="40" Margin="80,150,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
         <Label Content="BorderColor:" HorizontalAlignment="Left" Height="40" Margin="80,200,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center"  FontSize="16" FontFamily="Global serif" />
         <Label Content="StrokeThickness:" HorizontalAlignment="Left" Height="40" Margin="80,250,0,0" VerticalAlignment="Top" Width="140" VerticalContentAlignment="Center" FontSize="16" FontFamily="Global serif" />

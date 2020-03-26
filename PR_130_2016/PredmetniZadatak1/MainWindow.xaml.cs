@@ -239,7 +239,8 @@ namespace PredmetniZadatak1
         {
             if (!enableDrawingPoinstForPolygon)
                 return;
-
+            if (pointsForPolygon.Count == 0)
+                return;
             pointsForPolygon = new List<Point>(pointsForPolygon);
             PolygonView PView = new PolygonView(pointsForPolygon);
             PView.ShowDialog();
