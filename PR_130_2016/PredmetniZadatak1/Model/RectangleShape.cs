@@ -46,7 +46,6 @@ namespace PredmetniZadatak1.Model
             EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.RECTANGLE);
             ERView.ShowDialog();
         }
-
         public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
         {
             if (Shape == null)

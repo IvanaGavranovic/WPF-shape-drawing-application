@@ -41,13 +41,11 @@ namespace PredmetniZadatak1.Model
             Shape = ellipse;
             return ellipse;
         }
-
         private void EllipseMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             EllipseAndRectangleView ERView = new EllipseAndRectangleView(this, EnumShape.ELLIPSE);
             ERView.ShowDialog();
         }
-
         public void UpdateShape(Brush fillColor, Brush borderColor, int borderThickness)
         {
             if (Shape == null)

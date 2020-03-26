@@ -217,7 +217,7 @@ namespace PredmetniZadatak1
                 }
             }
         }
-        void EnebleDrawingPlygon() // kad kliknem na dugme polygon
+        void EnebleDrawingPlygon()
         {
             if (!enableDrawingPoinstForPolygon)
             {

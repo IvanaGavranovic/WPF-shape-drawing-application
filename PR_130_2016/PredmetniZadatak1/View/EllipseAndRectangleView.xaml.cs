@@ -119,7 +119,6 @@ namespace PredmetniZadatak1.View
         }
         #endregion
 
-
         #region Titles
         public void ChooseTitle()
         {

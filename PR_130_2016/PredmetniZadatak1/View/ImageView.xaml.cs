@@ -47,6 +47,7 @@ namespace PredmetniZadatak1.View
             };
             pointToDraw = point;
             shapeToDraw = EnumShape.IMAGE;
+            imgPath = "";
 
             buttonDraw.Click += buttonDraw_Click;
         }
@@ -87,6 +88,8 @@ namespace PredmetniZadatak1.View
             buttonDraw.Click += buttonDrawUpdate_Click;
         }
         #endregion
+
+        #region Old data
         void DataInImage(string path)
         {
             BitmapImage logo = new BitmapImage();
@@ -100,7 +103,9 @@ namespace PredmetniZadatak1.View
         {
             ImageShape shape = (ImageShape)shapeToUpdate;
             DataInImage(shape.Path);
+            imgPath = shape.Path;
         }
+        #endregion
 
         #region Mouse position
         private void InitialLookButton(Button button)
@@ -254,6 +259,7 @@ namespace PredmetniZadatak1.View
         private void buttonChoose_Click(object sender, RoutedEventArgs e)
         {
             SelectedButton(buttonChoose);
+            imgPath = "";
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png|All files (*.*)|*.*";
 

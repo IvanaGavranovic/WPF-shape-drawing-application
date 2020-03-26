@@ -55,7 +55,6 @@ namespace PredmetniZadatak1.Model
         {
             ImageView IView = new ImageView(this, EnumShape.IMAGE);
             IView.ShowDialog();
-
         }
         public void UpdateShape(string path)
         {
@@ -68,7 +67,6 @@ namespace PredmetniZadatak1.Model
             };
 
             Path = path;
-
         }
     }
 }
